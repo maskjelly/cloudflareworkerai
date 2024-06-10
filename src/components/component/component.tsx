@@ -8,12 +8,13 @@
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useState } from "react";
+import React from "react";
 
 export function Component() {
   const [prompt, setPrompt] = useState("");
   const [image, setImage] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the default form submission behavior
     const response = await fetch("https://workersai.aaryan-539.workers.dev?prompt=" + prompt);
     const blob = await response.blob();
