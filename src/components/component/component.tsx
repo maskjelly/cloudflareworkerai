@@ -48,6 +48,9 @@ export function Component() {
           />
         </div>
       </div>
+      <footer>
+        Created by Aaryan AKA - Whiteye 
+      </footer>
     </div>
   )
 }
