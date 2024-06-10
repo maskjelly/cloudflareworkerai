@@ -17,6 +17,7 @@ export function Component() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the default form submission behavior
     const response = await fetch("https://workersai.aaryan-539.workers.dev?prompt=" + prompt);
+    console.log("Prompt : "+prompt);
     const blob = await response.blob();
     setImage(URL.createObjectURL(blob));
   };
