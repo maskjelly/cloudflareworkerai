@@ -29,6 +29,10 @@ export function Component() {
           <p className="max-w-md text-gray-500 dark:text-gray-400 text-center">
             Enter a prompt and let our AI generate a unique and captivating image for you.
           </p>
+          <p className="font-bold text-center">
+            (PS : This is a very base model so dont expect too much out of it .)
+
+          </p>
           <form className="w-full max-w-md flex items-center gap-2" onSubmit={handleSubmit}>
             <Input className="flex-1" placeholder="Enter a prompt" type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} />
             <Button type="submit">Generate</Button>
