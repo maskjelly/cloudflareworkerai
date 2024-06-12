@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react";
 import React from "react";
 import { motion } from "framer-motion";
+import { saveAs } from 'file-saver';
 
 export function Component() {
   const [prompt, setPrompt] = useState("");
   const [image, setImage] = useState('');
+  const [imageBlob, setImageBlob] = useState(null); // State to store image blob
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(10);
   const [timeExceeded, setTimeExceeded] = useState(false);
@@ -21,8 +23,16 @@ export function Component() {
     const response = await fetch("https://workersai.aaryan-539.workers.dev?prompt=" + prompt);
     console.log("Prompt : " + prompt);
     const blob = await response.blob();
+
+    setImageBlob(blob); // Store the blob
     setImage(URL.createObjectURL(blob));
     setOverlayVisible(false); // Toggle the overlay animation off
+  };
+
+  const handleDownload = () => {
+    if (imageBlob) {
+      saveAs(imageBlob, 'generated-image.png');
+    }
   };
 
   useEffect(() => {
@@ -78,7 +88,13 @@ export function Component() {
             }}
             width="800"
           />
-        </div>
+          </div>
+          {image && (
+            <div className="flex justify-center mt-2">
+              <Button onClick={handleDownload}>Download Image</Button>
+            </div>
+          )}
+        
       </div>
       <footer>
         Created by Aaryan AKA - Whiteye
