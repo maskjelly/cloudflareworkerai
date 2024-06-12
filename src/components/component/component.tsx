@@ -62,7 +62,7 @@ export function Component() {
             (PS: This is a very base model so don't expect too much out of it.)
           </p>
           <form className="w-full max-w-md flex items-center gap-2" onSubmit={handleSubmit}>
-            <Input className="flex-1" placeholder="Enter a prompt" type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} />
+            <Input className="flex-1" placeholder="Try generating - Cyberpunk Cat " type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} />
             <Button type="submit">Generate</Button>
           </form>
         </div>
