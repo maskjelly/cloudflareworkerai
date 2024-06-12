@@ -9,7 +9,7 @@ import { saveAs } from 'file-saver';
 export function Component() {
   const [prompt, setPrompt] = useState("");
   const [image, setImage] = useState('');
-  const [imageBlob, setImageBlob] = useState(null); // State to store image blob
+  const [imageBlob, setImageBlob] = useState<Blob | null>(null); // State to store image blob
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(10);
   const [timeExceeded, setTimeExceeded] = useState(false);
@@ -88,13 +88,12 @@ export function Component() {
             }}
             width="800"
           />
-          </div>
+        </div>
           {image && (
-            <div className="flex justify-center mt-2">
+            <div className="flex justify-center mt-1">
               <Button onClick={handleDownload}>Download Image</Button>
             </div>
           )}
-        
       </div>
       <footer>
         Created by Aaryan AKA - Whiteye
