@@ -4,8 +4,6 @@ const URLS = process.env.MONGOOSE_URL;
 
 mongoose
   .connect(URLS, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     serverSelectionTimeoutMS: 30000, // 30 seconds
     socketTimeoutMS: 45000, // 45 seconds
   })
@@ -26,6 +24,7 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  image: String, // Base64 encoded image
 });
 
 const UserPrompts =

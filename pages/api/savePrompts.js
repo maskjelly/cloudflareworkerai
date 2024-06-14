@@ -4,11 +4,19 @@ import UserPrompts from "./userPrompts";
 // Enable Mongoose debugging for more detailed logs
 mongoose.set("debug", true);
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "10mb", // Adjust as necessary
+    },
+  },
+};
+
 export default async function handler(req, res) {
   console.log("API Route Hit");
 
   if (req.method === "POST") {
-    const { prompt } = req.body;
+    const { prompt, image } = req.body; // Assume image is base64 encoded
     console.log("Request Body:", req.body);
 
     try {
@@ -17,6 +25,7 @@ export default async function handler(req, res) {
       if (existingPrompt) {
         existingPrompt.count += 1;
         existingPrompt.lastSaved = Date.now();
+        existingPrompt.image = image; // Update image
         await existingPrompt.save();
         console.log("Prompt Updated Successfully");
         res
@@ -26,7 +35,7 @@ export default async function handler(req, res) {
             prompt: existingPrompt,
           });
       } else {
-        const newPrompt = new UserPrompts({ prompt });
+        const newPrompt = new UserPrompts({ prompt, image });
         await newPrompt.save();
         console.log("Prompt Saved Successfully");
         res
