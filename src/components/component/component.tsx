@@ -19,14 +19,18 @@ export function Component() {
     setOverlayVisible(true); // Toggle the overlay animation
     setElapsedTime(10); // Reset the timer
     setTimeExceeded(false); // Reset the time exceeded flag
-
+      const responsel = await fetch('/api/savePrompts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt }),
+      });
     const response = await fetch("https://workersai.aaryan-539.workers.dev?prompt=" + prompt);
-    console.log("Prompt : " + prompt);
     const blob = await response.blob();
-
     setImageBlob(blob); // Store the blob
     setImage(URL.createObjectURL(blob));
-    setOverlayVisible(false); // Toggle the overlay animation off
+    setOverlayVisible(false);
   };
 
   const handleDownload = () => {
@@ -63,8 +67,8 @@ export function Component() {
   return (
     <div className="w-full max-w-5xl mx-auto py-12 md:py-16 lg:py-20 px-4 md:px-6">
       <div className="grid gap-8 md:gap-12">
-        <div className="flex flex-col items-center justify-center gap-4">
-          <h1 className="text-3xl md:text-4xl font-bold text-center">Generate Stunning Images</h1>
+        <div className="flex flex-col items-center justify-center gap-4 mt-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-center">Generate AI Images</h1>
           <p className="max-w-md text-gray-500 dark:text-gray-400 text-center">
             Enter a prompt and let our AI generate a unique and captivating image for you.
           </p>
@@ -83,18 +87,17 @@ export function Component() {
             height="500"
             src={image ? image : "/placeholder.svg"}
             style={{
-              aspectRatio: "800/500",
-              objectFit: "cover",
+              objectFit: "fill",
             }}
             width="800"
-          />
-        </div>
-          {image && (
-            <div className="flex justify-center mt-1">
+          />       
+           </div>
+      </div>
+  {image && (
+            <div className="flex justify-center mt-3">
               <Button onClick={handleDownload}>Download Image</Button>
             </div>
           )}
-      </div>
       <footer>
         Created by Aaryan AKA - Whiteye
       </footer>
