@@ -97,7 +97,7 @@ export function Component() {
             Enter a prompt and let our AI generate a unique and captivating image for you.
           </p>
           <p className="font-bold text-center">
-            (Something images might be shit cause this is the best i can do while this is free)
+            (Something images might not be upto your expectations . and i cant do anything about that )
           </p>
           <form className="w-full max-w-md flex items-center gap-2" onSubmit={handleSubmit}>
             <Input className="flex-1" placeholder="Try generating - Cyberpunk Cat" type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} />
