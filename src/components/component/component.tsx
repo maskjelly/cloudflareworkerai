@@ -20,15 +20,17 @@ export function Component() {
     setOverlayVisible(true);
     setElapsedTime(10);
     setTimeExceeded(false);
-
+// This is where i fetch the response from the server .
     const response = await fetch("https://workersai.aaryan-539.workers.dev?prompt=" + prompt);
     const blob = await response.blob();
     setImageBlob(blob);
+// This is where i put the image into the blob management .
+
     const base64data = await convertBlobToBase64(blob);
 
     setImage(base64data as string);
     setOverlayVisible(false);
-
+// This is just for saving the prompt to MongoDB database
     const saveResponse = await fetch('/api/savePrompts', {
       method: 'POST',
       headers: {
@@ -95,7 +97,7 @@ export function Component() {
             Enter a prompt and let our AI generate a unique and captivating image for you.
           </p>
           <p className="font-bold text-center">
-            (PS: This is a new model so some things might need a better prompt than usual.)
+            (Something images might be shit cause this is the best i can do while this is free)
           </p>
           <form className="w-full max-w-md flex items-center gap-2" onSubmit={handleSubmit}>
             <Input className="flex-1" placeholder="Try generating - Cyberpunk Cat" type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} />
@@ -112,7 +114,7 @@ export function Component() {
         </div>
         {image && (
           <div className="flex justify-center">
-            <Button onClick={handleDownload}>Download Image</Button>
+            <Button onClick={handleDownload}> Download</Button>
           </div>
         )}
         <footer className="flex content-center justify-center bg-yellow-400 text-black font-bold">
