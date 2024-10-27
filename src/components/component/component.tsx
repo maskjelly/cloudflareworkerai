@@ -31,18 +31,6 @@ export function Component() {
     setImage(base64data as string);
     setOverlayVisible(false);
 // This is just for saving the prompt to MongoDB database
-    const saveResponse = await fetch('/api/savePrompts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // ﹔;
-      body: JSON.stringify({ prompt, image: base64data }),
-    })
-
-    if (!saveResponse.ok) {
-      console.error('Error saving prompt');
-    }
   };
 
   const convertBlobToBase64 = (blob: Blob): Promise<string | ArrayBuffer | null> => {
@@ -68,7 +56,7 @@ export function Component() {
     if (overlayVisible) {
       document.body.style.overflow = "hidden";
       intervalId = setInterval(() => {
-        setElapsedTime(prevTime => {
+        setElapsedTime((prevTime: number) => {
           if (prevTime > 1) {
             return prevTime - 1;
           } else {
@@ -100,7 +88,7 @@ export function Component() {
             (Something images might not be upto your expectations . and i cant do anything about that )
           </p>
           <form className="w-full max-w-md flex items-center gap-2" onSubmit={handleSubmit}>
-            <Input className="flex-1" placeholder="Try generating - Cyberpunk Cat" type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} />
+            <Input className="flex-1" placeholder="Try generating - Cyberpunk Cat" type="text" value={prompt} onChange={(e: { target: { value: any; }; }) => setPrompt(e.target.value)} />
             <Button type="submit">Generate</Button>
           </form>
         </div>
